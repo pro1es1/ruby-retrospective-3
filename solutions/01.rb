@@ -3,35 +3,12 @@
 # Add a new methods (function) to class Integer.
 
 class Integer
-  def remainder (quotient, divisor)
-    if quotient % divisor == 0
-      return false
-    else
-      return true
-    end
-  end
-  def has_divisor_except_itself_and_one (number)
-    divisor = number - 1
-    while divisor > 1 do
-      return false if not remainder number, divisor
-      divisor -= 1
-    end
-    return true
-  end
-  def finds_first_prime_divisor list
-    num = 2
-    while num <= list[-1].abs
-      pr_div = list[-1].abs / num
-      return list+[num,pr_div] if num.prime? and not remainder list[-1].abs,num
-      num += 1
-    end
+  def is_prime? number
+    if self / number == 1 then return true end
+    if self % number == 0 then return false else is_prime? number + 1 end
   end
   def prime?
-    if self <= 1
-      return false
-    elsif self > 1
-      has_divisor_except_itself_and_one self
-    end
+    is_prime? 2
   end
   def prime_factors
     list_of_prime_factors = [self]
